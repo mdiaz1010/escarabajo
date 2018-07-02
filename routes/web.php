@@ -18,18 +18,7 @@ Route::get('/', [
     'uses'=>'FrontController@index'
 ]);
 
-Route::get('categories/{name}',[
-    'uses'=>'FrontController@searchCategory',
-    'as'  =>'search.category'
-]);
-Route::get('tags/{name}',[
-    'uses'=>'FrontController@searchTag',
-    'as'  =>'search.tag'
-]);
-Route::get('articles/{slug}',[
-    'uses'=>'FrontController@viewArticle',
-    'as'  =>'view.article'
-]);
+
 //RUTAS DEL PANEL DE ADMINISTRACION
 
 Route::group(['prefix'=>'admin','middleware'=>['auth']],function(){

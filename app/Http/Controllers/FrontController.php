@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Article;
 use App\Category;
 use App\Tag;
+use App\User;
 use Carbon\Carbon;
 class FrontController extends Controller
 {
@@ -16,17 +17,13 @@ class FrontController extends Controller
      */
     public function __construct()
     {
+       $this->middleware('auth');
        Carbon::setlocale('es');
     }
     public function index()
     {
-        $articles= Article::orderBy('id','DESC')->paginate(4);
-        $articles->each(function($articles){
-            $articles->category;
-            $articles->images;
-        });
-
-        return view('auth.dashboard')->with('articles',$articles);
+        $users= User::orderBy('id','ASC')->paginate(5);
+        return view('admin.users.index')->with('users',$users);
     }
     public function searchCategory($name)
     {

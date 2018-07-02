@@ -33,8 +33,8 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('admin/articles') }}">
-                       Inicio
+                    <a class="navbar-brand" href="{{ url('admin/users') }}">
+                        Inicio
                     </a>
                 </div>
 
@@ -48,36 +48,31 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
 
-                        @guest
-
-                        @else
-                      <!--  <li><a href="{{ url('admin/articles') }}">Articulos</a></li>-->
-                        <li><a href="{{ url('admin/images') }}">Deudas</a></li>
+                        @guest @else
+                        <!--  <li><a href="{{ url('admin/articles') }}">Articulos</a></li>-->
+                        <li>
+                            <a href="{{ url('admin/images') }}">Deudas</a>
+                        </li>
                         @if(Auth::user()->admin()==true)
-                     <!--   <li><a href="{{ url('admin/categories') }}">Categorias</a></li> -->
-                        <li><a href="{{ url('admin/users') }}">Usuarios </a></li>
-                     <!--   <li><a href="{{ url('admin/tags') }}">Tag</a></li>-->
+                        <!--   <li><a href="{{ url('admin/categories') }}">Categorias</a></li> -->
+                        <li>
+                            <a href="{{ url('admin/users') }}">Usuarios </a>
+                        </li>
+                        <!--   <li><a href="{{ url('admin/tags') }}">Tag</a></li>-->
                         @endif
 
 
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                {{ Auth::user()->name }}
-                                <span class="caret"></span>
+
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                Cerrar sesión
                             </a>
 
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        Cerrar sesión
-                                    </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </li>
-                            </ul>
                         </li>
                         @endguest
                     </ul>
@@ -88,7 +83,7 @@
 
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
+                    <div class="col-md-12 ">
                         <div class="panel panel-default">
                             <div class="panel-heading">@yield('title','default')</div>
                             <div class="panel-body table-responsive ">
@@ -103,7 +98,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('plugins/jquery/js/jquery-2.1.4.js') }}"></script>
     <script src="{{ asset('plugins/chosen/chosen.jquery.js') }}"></script>
     <script src="{{ asset('plugins/Trumbowyg/trumbowyg.js') }}"></script>
